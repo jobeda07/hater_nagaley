@@ -1,0 +1,8 @@
+[04-Sep-2024 00:05:54 UTC] PHP Fatal error:  Uncaught Error: Class "PHPUnit\Util\PHP\AbstractPhpProcess" not found in /mnt/home2/exprobd/public_html/vendor/phpunit/phpunit/src/Util/PHP/DefaultPhpProcess.php:34
+Stack trace:
+#0 {main}
+  thrown in /mnt/home2/exprobd/public_html/vendor/phpunit/phpunit/src/Util/PHP/DefaultPhpProcess.php on line 34
+[04-Sep-2024 00:05:56 UTC] PHP Fatal error:  Uncaught Error: Class "PHPUnit\Util\PHP\DefaultPhpProcess" not found in /mnt/home2/exprobd/public_html/vendor/phpunit/phpunit/src/Util/PHP/WindowsPhpProcess.php:21
+Stack trace:
+#0 {main}
+  thrown in /mnt/home2/exprobd/public_html/vendor/phpunit/phpunit/src/Util/PHP/WindowsPhpProcess.php on line 21
