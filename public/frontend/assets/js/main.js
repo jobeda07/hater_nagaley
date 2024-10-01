@@ -40,18 +40,60 @@
         $(".sticky-sidebar").theiaStickySidebar();
     }
 
-    $('.slider__active').slick({
+    $(".slider__active").slick({
         slidesToShow: 1,
         arrows: false,
-        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
-        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
-        fade: true,
+        vertical: true,
+        fade: false,
+        loop: true,
+        dots: true,
+    });
+
+    $(".cat-product-container").slick({
+        slidesToShow: 8,
+        arrows: false,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        vertical: false,
+        fade: false,
         loop: true,
         dots: false,
-      });
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 6,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 1025,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
+    });
+
 
     /*------ Hero slider 1 ----*/
     $(".hero-slider-1").slick({
@@ -487,7 +529,7 @@
     }
 
     /*-----------------------
-        Shop filter active 
+        Shop filter active
     ------------------------- */
     $(".shop-filter-toogle").on("click", function (e) {
         e.preventDefault();

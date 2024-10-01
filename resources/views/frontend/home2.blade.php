@@ -99,13 +99,15 @@
                 .product-cart-wrap.style-2 .product-content-wrap {
                     margin-top: 0;
                 }
+
                 .product-cart-wrap.style-2 .product-content-wrap .deals-content {
                     padding: 10px;
                 }
+
                 .product-card-bottom {
-                    {{--  flex-direction: column;  --}}
-                    margin-top: 0 !important;
+                    {{--  flex-direction: column;  --}} margin-top: 0 !important;
                 }
+
                 .product-cart-wrap .product-card-bottom .add-cart .add {
                     padding: 6px;
                     text-align: center;
@@ -113,9 +115,7 @@
             }
 
             /* Large Mobile :480px. */
-            @media only screen and (min-width: 480px) and (max-width: 767px) {
-                
-            }
+            @media only screen and (min-width: 480px) and (max-width: 767px) {}
         </style>
     @endpush
 
@@ -162,11 +162,11 @@
                 <div class="col-xl-10 col-lg-9">
                     <div class="slider__active">
                         @foreach ($sliders as $slider)
-                         <a href="{{$slider->slider_url}}">
-                            <div class="single__slider">
-                                <img src="{{ asset($slider->slider_img) }}" alt="">
-                            </div>
-                         </a>
+                            <a href="{{ $slider->slider_url }}">
+                                <div class="single__slider">
+                                    <img src="{{ asset($slider->slider_img) }}" alt="">
+                                </div>
+                            </a>
                         @endforeach
                     </div>
 
@@ -182,72 +182,79 @@
             <div class="section-title">
                 <h3>Top Categories</h3>
             </div>
-                <div class="cat-product-container">
-            @foreach ($featured_category as $item)
-            <a href="{{ route('product.category', $item->slug) }}">
-                <div class="cat-pro-wrapper">
-                    <div class="cat-pro-img-container">
-                      <img src="{{ asset($item->image) }}" alt="" />
+            <div class="cat-product-container">
+                @foreach ($featured_category as $item)
+                    <div class="single__slider">
+                        <a href="{{ route('product.category', $item->slug) }}">
+                            <div class="cat-pro-wrapper">
+                                <div class="cat-pro-img-container">
+                                    <img src="{{ asset($item->image) }}" alt="" />
+                                </div>
+                                <div class="cat-pro-name">
+                                    <a href="{{ route('product.category', $item->slug) }}" class="cat-pro-text">
+                                        @if (session()->get('language') == 'bangla')
+                                            {{ $item->name_bn }}
+                                        @else
+                                            {{ $item->name_en }}
+                                        @endif
+                                    </a>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <div class="cat-pro-name">
-                        <a href="{{ route('product.category', $item->slug) }}" class="cat-pro-text">
-                            @if (session()->get('language') == 'bangla')
-                                {{ $item->name_bn }}
-                            @else
-                                {{ $item->name_en }}
-                            @endif
-                      </a>
-                    </div>
-                </div>
-            </a>
-            @endforeach
-                </div>
+                @endforeach
+            </div>
         </div>
     </div>
     {{-- category end --}}
-    
+
     <!-- Campaign Slider Start-->
-	@php
+    @php
         $campaign = \App\Models\Campaing::where('status', 1)->where('is_featured', 1)->first();
     @endphp
-    
-    @if($campaign)
+
+    @if ($campaign)
         @php
             $start_diff = date_diff(date_create($campaign->flash_start ?? ''), date_create(date('d-m-Y H:i:s')));
             $end_diff = date_diff(date_create(date('d-m-Y H:i:s')), date_create($campaign->flash_end ?? ''));
         @endphp
-        
+
         @if ($start_diff->invert == 0 && $end_diff->invert == 0)
-        <section class="common-product section-padding">
-    	    <div class="container wow animate__animated animate__fadeIn">
-    	        <div class="section-title">
-    	            <div class="title">
-    	                <h3>My Campaign Sell</h3>
-    
-    	                <div class="deals-countdown-wrap">
-    	                    <div class="deals-countdown" data-countdown="{{ date(('Y-m-d H:i:s'), strtotime($campaign->flash_end)) }}"></div>
-    	                </div>
-    	            </div>
-    	            <a href="#" class="btn btn-sm btn-primary">View more</a>
-    	        </div>
-    	        <div class="carausel-5-columns-cover position-relative">
-    	        	<div class="slider-arrow slider-arrow-2 carausel-5-columns-common-arrow" id="carausel-5-columns-common-arrows"></div>
-    	            <div class="carausel-5-columns-common carausel-arrow-center" id="carausel-5-columns-common">
-    	            	@foreach($campaign->campaing_products->take(20) as $campaing_product)
-    	            		@php
-                                $product = \App\Models\Product::find($campaing_product->product_id);
-                            @endphp
-                            @if ($product != null && $product->status != 0)
-    	                		@include('frontend.common.product_grid_view',['product' => $product])
-    	                	@endif
-    	                @endforeach
-    	            </div>
-    	        </div>
-    	    </div>
-    	</section>
+            <section class="common-product section-padding">
+                <div class="container wow animate__animated animate__fadeIn">
+                    <div class="section-title">
+                        <div class="title">
+                            <div class="d-flex align-items-center w-100" style="justify-content: space-between">
+                                <h3>My Campaign Sell</h3>
+                                <a href="#" class="btn btn-sm btn-primary d-sm-block d-md-none">View more</a>
+                            </div>
+
+                            <div class="deals-countdown-wrap">
+                                <div class="deals-countdown"
+                                    data-countdown="{{ date('Y-m-d H:i:s', strtotime($campaign->flash_end)) }}"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-sm btn-primary d-none d-md-block">View more</a>
+                    </div>
+                    <div class="carausel-5-columns-cover position-relative">
+                        <div class="slider-arrow slider-arrow-2 carausel-5-columns-common-arrow"
+                            id="carausel-5-columns-common-arrows"></div>
+                        <div class="carausel-5-columns-common carausel-arrow-center" id="carausel-5-columns-common">
+                            @foreach ($campaign->campaing_products->take(20) as $campaing_product)
+                                @php
+                                    $product = \App\Models\Product::find($campaing_product->product_id);
+                                @endphp
+                                @if ($product != null && $product->status != 0)
+                                    @include('frontend.common.product_grid_view', ['product' => $product])
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </section>
         @endif
     @endif
-	<!-- Campaign Slider End-->
+    <!-- Campaign Slider End-->
 
     <section class="product-tabs section-padding position-relative">
         <div class="container-fluid">
@@ -341,57 +348,55 @@
     </section>
     <!--End banners-->
 
-    @if(count($home2_featured_categories) > 0)
-    @foreach($home2_featured_categories->take(5) as $home2_featured_category)
-        @if(count($home2_featured_category->products) > 0)
-            <section class="common-product section-padding">
-                <div class="container wow animate__animated animate__fadeIn">
-                    <div class="section-title">
-                        @if (count($home2_featured_category->products->where('status', 1)) > 0)
-                        <div class="title">
-                            <h3>
-                                
-                                    
-                                    @if(session()->get('language') == 'bangla') 
-                                        {{
-                                            $home2_featured_category->name_bn 
-                                        }}
-                                    @else
-                                        {{
-                                            $home2_featured_category->name_en 
-                                        }} 
-                                    @endif
-                            </h3>
+    @if (count($home2_featured_categories) > 0)
+        @foreach ($home2_featured_categories->take(5) as $home2_featured_category)
+            @if (count($home2_featured_category->products) > 0)
+                <section class="common-product section-padding">
+                    <div class="container wow animate__animated animate__fadeIn">
+                        <div class="section-title">
+                            @if (count($home2_featured_category->products->where('status', 1)) > 0)
+                                <div class="title">
+                                    <h3>
+
+
+                                        @if (session()->get('language') == 'bangla')
+                                            {{ $home2_featured_category->name_bn }}
+                                        @else
+                                            {{ $home2_featured_category->name_en }}
+                                        @endif
+                                    </h3>
+                                </div>
+                                <a href="{{ route('product.category', $home2_featured_category->slug) }}"
+                                    class="btn btn-sm btn-primary">View more</a>
+                            @endif
                         </div>
-                        <a href="{{ route('product.category', $home2_featured_category->slug) }}" class="btn btn-sm btn-primary">View more</a>
-                     @endif
-                    </div>
-                    <div class="carausel-5-columns-cover position-relative">
-                        <div class="carausel-5-columns-common carausel-arrow-center" id="carausel-5-columns-common{{$home2_featured_category->id}}">
-                            
+                        <div class="carausel-5-columns-cover position-relative">
+                            <div class="carausel-5-columns-common carausel-arrow-center"
+                                id="carausel-5-columns-common{{ $home2_featured_category->id }}">
+
                                 @forelse($home2_featured_category->products as $product)
                                     @if ($product->status == 1)
-                                    @include('frontend.common.product_grid_view')
+                                        @include('frontend.common.product_grid_view')
                                     @endif
                                     <!--end product card-->
                                 @empty
-                                    @if(session()->get('language') == 'bangla') 
-                                        <h5 class="text-danger">এখানে কোন পণ্য খুঁজে পাওয়া যায়নি!</h5> 
-                                    @else 
-                                    <h5 class="text-danger">No products were found here!</h5>
+                                    @if (session()->get('language') == 'bangla')
+                                        <h5 class="text-danger">এখানে কোন পণ্য খুঁজে পাওয়া যায়নি!</h5>
+                                    @else
+                                        <h5 class="text-danger">No products were found here!</h5>
                                     @endif
                                 @endforelse
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
             @endif
         @endforeach
     @endif
     <!--Products Tabs-->
     <!--End 4 banners-->
     @if (count($todays_sale) > 0)
-        <section class="section-padding pb-5">
+        <section class="pb-5 section-padding">
             <div class="container-fluid">
                 <div class="section-title wow animate__animated animate__fadeIn">
                     <h3 class="">Daily Best Sells</h3>
@@ -446,11 +451,11 @@
 
     @if (count($hot_deals) > 0)
         <!-- Start Hot Deals -->
-        <section class="section-padding pb-5">
+        <section class="pb-5 section-padding">
             <div class="container-fluid">
                 <div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
                     <h3 class="">Hot Deals</h3>
-                    <a class="show-all btn btn-primary text-white" href="{{ route('hot_deals.all') }}">
+                    <a class="text-white show-all btn btn-primary" href="{{ route('hot_deals.all') }}">
                         All Deals
                         <i class="fi-rs-angle-right"></i>
                     </a>
@@ -470,13 +475,13 @@
     <section class="section-padding">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 col-sm-6  col-12 wow animate__animated animate__fadeInUp"
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 col-sm-6 col-12 wow animate__animated animate__fadeInUp"
                     data-wow-delay="0">
-                    <h4 class="section-title style-1 mb-30 animated animated">Top Selling</h4>
-                    <div class="product-list-small animated animated">
+                    <h4 class="section-title style-1 mb-30 animated">Top Selling</h4>
+                    <div class="product-list-small animated">
                         @foreach ($product_top_sellings as $product_top_selling)
                             <article class="row align-items-center hover-up">
-                                <figure class="col-md-4 mb-0">
+                                <figure class="mb-0 col-md-4">
                                     <a href="{{ route('product.details', $product_top_selling->slug) }}">
                                         @if (
                                             $product_top_selling->product_thumbnail &&
@@ -486,12 +491,12 @@
                                                 src="{{ asset($product_top_selling->product_thumbnail) }}"
                                                 alt="" />
                                         @else
-                                            <img class="img-lg mb-3" src="{{ asset('upload/no_image.jpg') }}"
+                                            <img class="mb-3 img-lg" src="{{ asset('upload/no_image.jpg') }}"
                                                 alt="" />
                                         @endif
                                     </a>
                                 </figure>
-                                <div class="col-md-8 mb-0">
+                                <div class="mb-0 col-md-8">
                                     <h6>
                                         <a href="{{ route('product.details', $product_top_selling->slug) }}">
                                             @if (session()->get('language') == 'bangla')
@@ -505,43 +510,55 @@
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                        <span class="ml-5 font-small text-muted"> (4.0)</span>
                                     </div>
                                     @php
                                         if (auth()->check() && auth()->user()->role == 7) {
                                             if ($product_top_selling->discount_type == 1) {
-                                                $price_after_discount = $product_top_selling->reseller_price - $product_top_selling->discount_price;
+                                                $price_after_discount =
+                                                    $product_top_selling->reseller_price -
+                                                    $product_top_selling->discount_price;
                                             } elseif ($product_top_selling->discount_type == 2) {
-                                                $price_after_discount = $product_top_selling->reseller_price - ($product_top_selling->reseller_price * $product_top_selling->discount_price) / 100;
+                                                $price_after_discount =
+                                                    $product_top_selling->reseller_price -
+                                                    ($product_top_selling->reseller_price *
+                                                        $product_top_selling->discount_price) /
+                                                        100;
                                             }
                                         } else {
                                             if ($product_top_selling->discount_type == 1) {
-                                                $price_after_discount = $product_top_selling->regular_price - $product_top_selling->discount_price;
+                                                $price_after_discount =
+                                                    $product_top_selling->regular_price -
+                                                    $product_top_selling->discount_price;
                                             } elseif ($product_top_selling->discount_type == 2) {
-                                                $price_after_discount = $product_top_selling->regular_price - ($product_top_selling->regular_price * $product_top_selling->discount_price) / 100;
+                                                $price_after_discount =
+                                                    $product_top_selling->regular_price -
+                                                    ($product_top_selling->regular_price *
+                                                        $product_top_selling->discount_price) /
+                                                        100;
                                             }
                                         }
                                     @endphp
 
                                     @if ($product_top_selling->discount_price > 0)
                                         @if (auth()->check() && auth()->user()->role == 7)
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $price_after_discount }}</span>
                                                 <span class="old-price">৳{{ $product_top_selling->reseller_price }}</span>
                                             </div>
                                         @else
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $price_after_discount }}</span>
                                                 <span class="old-price">৳{{ $product_top_selling->regular_price }}</span>
                                             </div>
                                         @endif
                                     @else
                                         @if (auth()->check() && auth()->user()->role == 7)
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $product_top_selling->reseller_price }}</span>
                                             </div>
                                         @else
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $product_top_selling->regular_price }}</span>
                                             </div>
                                         @endif
@@ -551,13 +568,13 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 mb-md-0 wow  col-sm-6 col-12 animate__animated animate__fadeInUp"
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-md-0 wow col-sm-6 col-12 animate__animated animate__fadeInUp"
                     data-wow-delay=".1s">
-                    <h4 class="section-title style-1 mb-30 animated animated">Trending Products</h4>
-                    <div class="product-list-small animated animated">
+                    <h4 class="section-title style-1 mb-30 animated">Trending Products</h4>
+                    <div class="product-list-small animated">
                         @foreach ($product_trendings as $product_trending)
                             <article class="row align-items-center hover-up">
-                                <figure class="col-md-4 mb-0">
+                                <figure class="mb-0 col-md-4">
                                     <a href="{{ route('product.details', $product_trending->slug) }}">
                                         @if (
                                             $product_trending->product_thumbnail &&
@@ -566,12 +583,12 @@
                                             <img class="default-img"
                                                 src="{{ asset($product_trending->product_thumbnail) }}" alt="" />
                                         @else
-                                            <img class="img-lg mb-3" src="{{ asset('upload/no_image.jpg') }}"
+                                            <img class="mb-3 img-lg" src="{{ asset('upload/no_image.jpg') }}"
                                                 alt="" />
                                         @endif
                                     </a>
                                 </figure>
-                                <div class="col-md-8 mb-0">
+                                <div class="mb-0 col-md-8">
                                     <h6>
                                         <a href="{{ route('product.details', $product_trending->slug) }}">
                                             @if (session()->get('language') == 'bangla')
@@ -585,42 +602,54 @@
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                        <span class="ml-5 font-small text-muted"> (4.0)</span>
                                     </div>
                                     @php
                                         if (auth()->check() && auth()->user()->role == 7) {
                                             if ($product_trending->discount_type == 1) {
-                                                $price_after_discount = $product_trending->reseller_price - $product_trending->discount_price;
+                                                $price_after_discount =
+                                                    $product_trending->reseller_price -
+                                                    $product_trending->discount_price;
                                             } elseif ($product_trending->discount_type == 2) {
-                                                $price_after_discount = $product_trending->reseller_price - ($product_trending->reseller_price * $product_trending->discount_price) / 100;
+                                                $price_after_discount =
+                                                    $product_trending->reseller_price -
+                                                    ($product_trending->reseller_price *
+                                                        $product_trending->discount_price) /
+                                                        100;
                                             }
                                         } else {
                                             if ($product_trending->discount_type == 1) {
-                                                $price_after_discount = $product_trending->regular_price - $product_trending->discount_price;
+                                                $price_after_discount =
+                                                    $product_trending->regular_price -
+                                                    $product_trending->discount_price;
                                             } elseif ($product_trending->discount_type == 2) {
-                                                $price_after_discount = $product_trending->regular_price - ($product_trending->regular_price * $product_trending->discount_price) / 100;
+                                                $price_after_discount =
+                                                    $product_trending->regular_price -
+                                                    ($product_trending->regular_price *
+                                                        $product_trending->discount_price) /
+                                                        100;
                                             }
                                         }
                                     @endphp
                                     @if ($product_trending->discount_price > 0)
                                         @if (auth()->check() && auth()->user()->role == 7)
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $price_after_discount }}</span>
                                                 <span class="old-price">৳{{ $product_trending->reseller_price }}</span>
                                             </div>
                                         @else
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $price_after_discount }}</span>
                                                 <span class="old-price">৳{{ $product_trending->regular_price }}</span>
                                             </div>
                                         @endif
                                     @else
                                         @if (auth()->check() && auth()->user()->role == 7)
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $product_trending->reseller_price }}</span>
                                             </div>
                                         @else
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $product_trending->regular_price }}</span>
                                             </div>
                                         @endif
@@ -630,13 +659,13 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 col-sm-6  col-12 wow animate__animated animate__fadeInUp"
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 col-sm-6 col-12 wow animate__animated animate__fadeInUp"
                     data-wow-delay=".2s">
-                    <h4 class="section-title style-1 mb-30 animated animated">Recently added</h4>
-                    <div class="product-list-small animated animated">
+                    <h4 class="section-title style-1 mb-30 animated">Recently added</h4>
+                    <div class="product-list-small animated">
                         @foreach ($product_recently_adds as $product_recently_add)
                             <article class="row align-items-center hover-up">
-                                <figure class="col-md-4 mb-0">
+                                <figure class="mb-0 col-md-4">
                                     <a href="{{ route('product.details', $product_recently_add->slug) }}">
                                         @if (
                                             $product_recently_add->product_thumbnail &&
@@ -646,12 +675,12 @@
                                                 src="{{ asset($product_recently_add->product_thumbnail) }}"
                                                 alt="" />
                                         @else
-                                            <img class="img-lg mb-3" src="{{ asset('upload/no_image.jpg') }}"
+                                            <img class="mb-3 img-lg" src="{{ asset('upload/no_image.jpg') }}"
                                                 alt="" />
                                         @endif
                                     </a>
                                 </figure>
-                                <div class="col-md-8 mb-0">
+                                <div class="mb-0 col-md-8">
                                     <h6>
                                         <a href="{{ route('product.details', $product_recently_add->slug) }}">
                                             @if (session()->get('language') == 'bangla')
@@ -665,43 +694,55 @@
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                        <span class="ml-5 font-small text-muted"> (4.0)</span>
                                     </div>
                                     @php
                                         if (auth()->check() && auth()->user()->role == 7) {
                                             if ($product_recently_add->discount_type == 1) {
-                                                $price_after_discount = $product_recently_add->reseller_price - $product_recently_add->discount_price;
+                                                $price_after_discount =
+                                                    $product_recently_add->reseller_price -
+                                                    $product_recently_add->discount_price;
                                             } elseif ($product_recently_add->discount_type == 2) {
-                                                $price_after_discount = $product_recently_add->reseller_price - ($product_recently_add->reseller_price * $product_recently_add->discount_price) / 100;
+                                                $price_after_discount =
+                                                    $product_recently_add->reseller_price -
+                                                    ($product_recently_add->reseller_price *
+                                                        $product_recently_add->discount_price) /
+                                                        100;
                                             }
                                         } else {
                                             if ($product_recently_add->discount_type == 1) {
-                                                $price_after_discount = $product_recently_add->regular_price - $product_recently_add->discount_price;
+                                                $price_after_discount =
+                                                    $product_recently_add->regular_price -
+                                                    $product_recently_add->discount_price;
                                             } elseif ($product_recently_add->discount_type == 2) {
-                                                $price_after_discount = $product_recently_add->regular_price - ($product_recently_add->regular_price * $product_recently_add->discount_price) / 100;
+                                                $price_after_discount =
+                                                    $product_recently_add->regular_price -
+                                                    ($product_recently_add->regular_price *
+                                                        $product_recently_add->discount_price) /
+                                                        100;
                                             }
                                         }
                                     @endphp
                                     @if ($product_recently_add->discount_price > 0)
                                         @if (auth()->check() && auth()->user()->role == 7)
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $price_after_discount }}</span>
                                                 <span
                                                     class="old-price">৳{{ $product_recently_add->reseller_price }}</span>
                                             </div>
                                         @else
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $price_after_discount }}</span>
                                                 <span class="old-price">৳{{ $product_recently_add->regular_price }}</span>
                                             </div>
                                         @endif
                                     @else
                                         @if (auth()->check() && auth()->user()->role == 7)
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $product_recently_add->reseller_price }}</span>
                                             </div>
                                         @else
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $product_recently_add->regular_price }}</span>
                                             </div>
                                         @endif
@@ -711,13 +752,13 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 col-sm-6  col-12 wow animate__animated animate__fadeInUp"
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 col-sm-6 col-12 wow animate__animated animate__fadeInUp"
                     data-wow-delay=".3s">
-                    <h4 class="section-title style-1 mb-30 animated animated">Top Rated</h4>
-                    <div class="product-list-small animated animated">
+                    <h4 class="section-title style-1 mb-30 animated">Top Rated</h4>
+                    <div class="product-list-small animated">
                         @foreach ($product_top_rates as $product_top_rate)
                             <article class="row align-items-center hover-up">
-                                <figure class="col-md-4 mb-0">
+                                <figure class="mb-0 col-md-4">
                                     <a href="{{ route('product.details', $product_top_rate->slug) }}">
                                         @if (
                                             $product_top_rate->product_thumbnail &&
@@ -726,12 +767,12 @@
                                             <img class="default-img"
                                                 src="{{ asset($product_top_rate->product_thumbnail) }}" alt="" />
                                         @else
-                                            <img class="img-lg mb-3" src="{{ asset('upload/no_image.jpg') }}"
+                                            <img class="mb-3 img-lg" src="{{ asset('upload/no_image.jpg') }}"
                                                 alt="" />
                                         @endif
                                     </a>
                                 </figure>
-                                <div class="col-md-8 mb-0">
+                                <div class="mb-0 col-md-8">
                                     <h6>
                                         <a href="{{ route('product.details', $product_top_rate->slug) }}">
                                             @if (session()->get('language') == 'bangla')
@@ -745,42 +786,54 @@
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                        <span class="ml-5 font-small text-muted"> (4.0)</span>
                                     </div>
                                     @php
                                         if (auth()->check() && auth()->user()->role == 7) {
                                             if ($product_top_rate->discount_type == 1) {
-                                                $price_after_discount = $product_top_rate->reseller_price - $product_top_rate->discount_price;
+                                                $price_after_discount =
+                                                    $product_top_rate->reseller_price -
+                                                    $product_top_rate->discount_price;
                                             } elseif ($product_top_rate->discount_type == 2) {
-                                                $price_after_discount = $product_top_rate->reseller_price - ($product_top_rate->reseller_price * $product_top_rate->discount_price) / 100;
+                                                $price_after_discount =
+                                                    $product_top_rate->reseller_price -
+                                                    ($product_top_rate->reseller_price *
+                                                        $product_top_rate->discount_price) /
+                                                        100;
                                             }
                                         } else {
                                             if ($product_top_rate->discount_type == 1) {
-                                                $price_after_discount = $product_top_rate->regular_price - $product_top_rate->discount_price;
+                                                $price_after_discount =
+                                                    $product_top_rate->regular_price -
+                                                    $product_top_rate->discount_price;
                                             } elseif ($product_top_rate->discount_type == 2) {
-                                                $price_after_discount = $product_top_rate->regular_price - ($product_top_rate->regular_price * $product_top_rate->discount_price) / 100;
+                                                $price_after_discount =
+                                                    $product_top_rate->regular_price -
+                                                    ($product_top_rate->regular_price *
+                                                        $product_top_rate->discount_price) /
+                                                        100;
                                             }
                                         }
                                     @endphp
                                     @if ($product_top_rate->discount_price > 0)
                                         @if (auth()->check() && auth()->user()->role == 7)
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $price_after_discount }}</span>
                                                 <span class="old-price">৳{{ $product_top_rate->reseller_price }}</span>
                                             </div>
                                         @else
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $price_after_discount }}</span>
                                                 <span class="old-price">৳{{ $product_top_rate->regular_price }}</span>
                                             </div>
                                         @endif
                                     @else
                                         @if (auth()->check() && auth()->user()->role == 7)
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $product_top_rate->reseller_price }}</span>
                                             </div>
                                         @else
-                                            <div class="product-price">
+                                            <div class="text-start product-price">
                                                 <span class="price">৳{{ $product_top_rate->regular_price }}</span>
                                             </div>
                                         @endif

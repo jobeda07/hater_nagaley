@@ -12,7 +12,7 @@
             speed: 1000,
             arrows: true,
             autoplay: true,
-            slidesToShow: 5,
+            slidesToShow: 6,
             slidesToScroll: 1,
             loop: true,
             adaptiveHeight: true,
@@ -27,7 +27,7 @@
                 {
                     breakpoint: 480,
                     settings: {
-                        slidesToShow: 1,
+                        slidesToShow: 2,
                         slidesToScroll: 1
                     }
                 }
@@ -50,7 +50,7 @@
             speed: 1000,
             arrows: true,
             autoplay: true,
-            slidesToShow: 5,
+            slidesToShow: 6,
             slidesToScroll: 1,
             loop: true,
             adaptiveHeight: true,
@@ -65,7 +65,7 @@
                 {
                     breakpoint: 480,
                     settings: {
-                        slidesToShow: 1,
+                        slidesToShow: 2,
                         slidesToScroll: 1
                     }
                 }
@@ -75,7 +75,7 @@
             appendArrows: appendArrowsClassName
         });
     });
-    
+
     /*Carausel 10 columns for vendors*/
     $(".carausel-10-columns-vendors").each(function (key, item) {
         var id = $(this).attr("id");
@@ -120,11 +120,11 @@
             appendArrows: appendArrowsClassName
         });
     });
-    
+
     /*Fix Bootstrap 5 tab & slick slider*/
 
     $('button[data-bs-toggle="tab"]').on("shown.bs.tab", function (e) {
         $(".carausel-4-columns-common").slick("setPosition");
     });
-    
+
 })(jQuery);
