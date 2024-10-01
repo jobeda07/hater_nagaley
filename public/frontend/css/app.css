@@ -23,7 +23,7 @@
 .dashboard .card i {
     font-size: 35px;
     margin-bottom: 10px;
-    color: #29003a;
+    color: #0d9dff;
 }
 @media only screen and (max-width: 991px) {
     .cart_hidden_mobile {
@@ -83,7 +83,7 @@
 }
 
 .product-cart-wrap .product-badges-right span.hot {
-    background-color: #29003a;
+    background-color: #0d9dff;
 }
 
 .product-cart-wrap .product-badges-right span:last-child {
@@ -237,7 +237,7 @@
     }
     .archive-header h1 {
         font-size: 28px;
-        color: #29003a;
+        color: #0d9dff;
     }
     .shop-product-fillter .sort-by-product-area .sort-by-product-wrap {
         padding: 5px 5px;
@@ -334,7 +334,7 @@
 }
 .advance-search .search-box {
     margin: 0 !important;
-    /*background: linear-gradient(to right,#29003a,#9cbb5f);*/
+    /*background: linear-gradient(to right,#0d9dff,#9cbb5f);*/
     background-color: #fff;
     align-items: center;
     position: absolute;
@@ -387,7 +387,7 @@
     height: 50px;
     width: 50px;
     border-width: 4px !important;
-    background-color: #29003a;
+    background-color: #0d9dff;
     border-radius: 50% !important;
 }
 .rounded-circle {
@@ -449,7 +449,7 @@
 }
 .cit-megabox > input:checked ~ .cit-megabox-elem,
 .cit-megabox > input:checked ~ .cit-megabox-elem {
-    border-color: #29003a;
+    border-color: #0d9dff;
 }
 .cit-megabox .cit-megabox-elem {
     border: 1px solid #e2e5ec;
@@ -494,7 +494,7 @@
 
 /*Footer Mid*/
 .footer-dark .dark-section {
-    background-color: #29003a;
+    background-color: #0d9dff;
 }
 .footer-dark .main-footer-custom p,
 .footer-dark .main-footer-custom strong,
@@ -546,7 +546,7 @@
 }
 .header-style-1 .header-middle-ptb-1 {
     padding: 5px 0;
-    background-color: #29003a;
+    background-color: #0d9dff;
 }
 /*.categories-dropdown-wrap .vertical-megamenu>li{*/
 /*    position: relative;*/

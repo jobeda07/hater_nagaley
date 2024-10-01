@@ -86,17 +86,17 @@
                             {{-- <a class="add" id="{{ $product->id }}" onclick="productView(this.id)"
                                 data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                                     class="mr-5 fi-rs-shopping-cart"></i>Add </a> --}}
-                            <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})">Add </a>
+                            <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})">অর্ডার </a>
 
-                            <a class="add addBuy" style="background: #AE6BCA" href="">buy now </a>
+                            <a class="add addBuy" style="background: #AE6BCA" href="">কার্ট </a>
                         @else
                             {{-- <input type="hidden" id="pfrom" value="direct">
 	                        <input type="hidden" id="product_product_id" value="{{ $product->id }}"  min="1">
 	                        <input type="hidden" id="{{ $product->id }}-product_pname" value="{{ $product->name_en }}">
 	                        <a class="add" onclick="addToCartDirect({{ $product->id }})" ><i class="mr-5 fi-rs-shopping-cart"></i>Add </a> --}}
-                            <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})">Add </a>
+                            <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})">অর্ডার </a>
 
-                            <a class="add addBuy" style="background: #AE6BCA" href="">buy now </a>
+                            <a class="add addBuy" style="background: #AE6BCA" href="">কার্ট</a>
                         @endif
                     </div>
                 </div>

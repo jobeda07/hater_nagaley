@@ -53,7 +53,7 @@
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
             <div class="container">
                 {{-- @if ($couponCode)
-                    <div class="maintain-sms text-end pt-3"> new:#29003a ,old:#800000
+                    <div class="maintain-sms text-end pt-3"> new:##0d9dff ,old:#800000
                         <h6 style="color:rgb(255, 255, 255) !important">Coupon Code: <span style="color:#e50505">{{ $couponCode }}</span></h6>
                     </div>
                 @endif --}}
@@ -526,10 +526,10 @@
                         <li class="menu-item-has-children">
                             <a href="{{ route('product.show') }}">
                                 @if (session()->get('language') == 'bangla')
-                                    দোকান
-                                @else
-                                    Shop
-                                @endif
+দোকান
+@else
+Shop
+@endif
                             </a>
                         </li>-->
                         @foreach (get_categories()->take(8) as $cat)
@@ -580,48 +580,62 @@
                         <!--        @foreach (get_categories()->take(8) as $cat)-->
                         <!--            <li class="menu-item-has-children">-->
                         <!--                <a href="{{ route('product.category', $cat->slug) }}">-->
-                        <!--                    @if (session()->get('language') == 'bangla')-->
+                        <!--                    @if (session()->get('language') == 'bangla')
+-->
                         <!--                        {{ $cat->name_bn }}-->
-                        <!--                    @else-->
+                    <!--                    @else-->
                         <!--                        {{ $cat->name_en }}-->
-                        <!--                    @endif-->
+                        <!--
+@endif-->
                         <!--                </a>-->
-                        <!--                @if ($category->sub_categories && count($category->sub_categories) > 0)-->
+                        <!--                @if ($category->sub_categories && count($category->sub_categories) > 0)
+-->
                         <!--                    <ul class="dropdown">-->
-                        <!--                        @foreach ($category->sub_categories as $subcategory)-->
+                        <!--                        @foreach ($category->sub_categories as $subcategory)
+-->
                         <!--                            <li>-->
                         <!--                                <a href="{{ route('product.category', $subcategory->slug) }}">-->
-                        <!--                                    @if (session()->get('language') == 'bangla')-->
+                        <!--                                    @if (session()->get('language') == 'bangla')
+-->
                         <!--                                        {{ $subcategory->name_bn }}-->
-                        <!--                                    @else-->
+                    <!--                                    @else-->
                         <!--                                        {{ $subcategory->name_en }}-->
-                        <!--                                    @endif-->
+                        <!--
+@endif-->
                         <!--                                </a>-->
                         <!--                            </li>-->
-                        <!--                        @endforeach-->
-                        <!--                        @if ($subcategory->sub_sub_categories && count($subcategory->sub_sub_categories) > 0)-->
+                        <!--
+@endforeach-->
+                        <!--                        @if ($subcategory->sub_sub_categories && count($subcategory->sub_sub_categories) > 0)
+-->
                         <!--                            <ul class="dropdown">-->
-                        <!--                                @foreach ($subcategory->sub_sub_categories as $subsubcategory)-->
+                        <!--                                @foreach ($subcategory->sub_sub_categories as $subsubcategory)
+-->
                         <!--                                    <li>-->
                         <!--                                        <a-->
                         <!--                                            href="{{ route('product.category', $subsubcategory->slug) }}">-->
-                        <!--                                            @if (session()->get('language') == 'bangla')-->
+                        <!--                                            @if (session()->get('language') == 'bangla')
+-->
                         <!--                                                {{ $subsubcategory->name_bn }}-->
-                        <!--                                            @else-->
+                    <!--                                            @else-->
                         <!--                                                {{ $subsubcategory->name_en }}-->
-                        <!--                                            @endif-->
+                        <!--
+@endif-->
                         <!--                                        </a>-->
                         <!--                                    </li>-->
-                        <!--                                @endforeach-->
+                        <!--
+@endforeach-->
                         <!--                            </ul>-->
-                        <!--                        @endif-->
+                        <!--
+@endif-->
                         <!--                    </ul>-->
-                        <!--                @endif-->
+                        <!--
+@endif-->
                         <!--            </li>-->
                         <!--        @endforeach-->
                         <!--    </ul>-->
                         <!--</li>-->
-                        {{--<li class="menu-item-has-children">
+                        {{-- <li class="menu-item-has-children">
                             <a href="#">Pages</a>
                             <ul class="dropdown">
                                 @foreach (get_pages_both_footer()->take(4) as $page)
