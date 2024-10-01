@@ -1,5 +1,5 @@
-<div class="col-lg-1-5 col-md-4 col-sm-12 col-12">
-    <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
+<div class="col-lg-1-5 col-md-4 col-sm-6 col-6">
+    <div class="mb-10 product-cart-wrap wow animate__animated animate__fadeIn" data-wow-delay=".1s">
         <div class="product-img-action-wrap">
             <div class="product-img product-img-zoom">
                 <a href="{{ route('product.details', $product->slug) }}">
@@ -139,19 +139,18 @@
         <div class="add-cart">
             @if ($product->is_varient == 1)
                 <a class="add addBtn w-100" id="{{ $product->id }}" onclick="productView(this.id)"
-                    data-bs-toggle="modal" data-bs-target="#quickViewModal">add </a>
+                    data-bs-toggle="modal" data-bs-target="#quickViewModal">অর্ডার </a>
             @else
                 @if ($product->stock_qty > 0)
                     <input type="hidden" id="pfrom" value="direct">
                     <input type="hidden" id="product_product_id" value="{{ $product->id }}" min="1">
                     <input type="hidden" id="{{ $product->id }}-product_pname" value="{{ $product->name_en }}">
 
-                    <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})">Add </a>
+                    <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})">অর্ডার </a>
 
-                    <a class="add addBuy" href="">buy now </a>
+                    <a class="add addBuy" href="">কার্ট </a>
                 @else
-                    <p class="stock_out add addBtn w-100 bg-danger"><i class="mr-5 fas fa-window-close"></i>Stock Out
-                    </p>
+                    <p class="stock_out w-100 bg-danger">Stock Out </p>
                 @endif
             @endif
         </div>

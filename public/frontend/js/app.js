@@ -12,29 +12,38 @@
             speed: 1000,
             arrows: true,
             autoplay: true,
-            slidesToShow: 6,
+            slidesToShow: 5,
             slidesToScroll: 1,
             loop: true,
             adaptiveHeight: true,
             responsive: [
                 {
+                    breakpoint: 1199,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 3,
+                    },
+                },
+                {
                     breakpoint: 1025,
                     settings: {
                         slidesToShow: 3,
-                        slidesToScroll: 3
-                    }
+                        slidesToScroll: 3,
+                    },
                 },
                 {
                     breakpoint: 480,
                     settings: {
                         slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                }
+                        slidesToScroll: 1,
+                    },
+                },
             ],
-            prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-arrow-small-left"></i></span>',
-            nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-arrow-small-right"></i></span>',
-            appendArrows: appendArrowsClassName
+            prevArrow:
+                '<span class="slider-btn slider-prev"><i class="fi-rs-arrow-small-left"></i></span>',
+            nextArrow:
+                '<span class="slider-btn slider-next"><i class="fi-rs-arrow-small-right"></i></span>',
+            appendArrows: appendArrowsClassName,
         });
     });
 
