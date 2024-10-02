@@ -175,7 +175,33 @@
         </div>
     </section>
     <!--End hero slider-->
-
+    {{-- banner start --}}
+    <section class="banners mb-25">
+        <div class="container">
+            <div class="row">
+                @foreach ($home_banners->take(5) as $banner)
+                    <div class="col-lg-3 col-md-6">
+                        <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay="0">
+                            <img src="{{ asset($banner->banner_img) }}" class="img-fluid" alt=""
+                                style="height: 300px; width: 100%;" />
+                            <div class="banner-text">
+                                <h4>
+                                    @if (session()->get('language') == 'bangla')
+                                        {{ $banner->title_bn }}
+                                    @else
+                                        {{ $banner->title_en }}
+                                    @endif
+                                </h4>
+                                <a href="{{ $banner->banner_url }}" class="btn btn-xs">Shop Now <i
+                                        class="fi-rs-arrow-small-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    {{-- banner end --}}
     {{-- category start --}}
     <div class="home__category">
         <div class="container-fluid">
@@ -297,7 +323,8 @@
                 </div>
                 <!--En tab one-->
                 @foreach (get_categories() as $category)
-                    <div class="tab-pane fade" id="category{{ $category->id }}" role="tabpanel" aria-labelledby="tab-two">
+                    <div class="tab-pane fade" id="category{{ $category->id }}" role="tabpanel"
+                        aria-labelledby="tab-two">
                         @php
                             $products = get_category_products($category->slug);
                         @endphp
@@ -322,10 +349,10 @@
     </section>
     <!--Products Tabs-->
 
-    <section class="banners mb-25">
+    {{-- <section class="banners mb-25">
         <div class="container-fluid">
             <div class="row g-4">
-                @foreach ($home_banners->skip(2)->take(3) as $banner)
+                @foreach ($home_banners->take(3) as $banner)
                     <div class="col-lg-3 col-md-6">
                         <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay="0">
                             <img src="{{ asset($banner->banner_img) }}" class="img-fluid" alt="" />
@@ -345,7 +372,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--End banners-->
 
     @if (count($home2_featured_categories) > 0)
