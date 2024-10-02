@@ -226,7 +226,7 @@
                         <div class="title">
                             <div class="d-flex align-items-center w-100" style="justify-content: space-between">
                                 <h3>My Campaign Sell</h3>
-                                <a href="#" class="btn btn-sm btn-primary d-sm-block d-md-none">View more</a>
+                                {{-- <a href="#" class="btn btn-sm btn-primary d-sm-block d-md-none">View more</a> --}}
                             </div>
 
                             <div class="deals-countdown-wrap">
@@ -234,7 +234,7 @@
                                     data-countdown="{{ date('Y-m-d H:i:s', strtotime($campaign->flash_end)) }}"></div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-sm btn-primary d-none d-md-block">View more</a>
+                        {{-- <a href="#" class="btn btn-sm btn-primary d-none d-md-block">View more</a> --}}
                     </div>
                     <div class="carausel-5-columns-cover position-relative">
                         <div class="slider-arrow slider-arrow-2 carausel-5-columns-common-arrow"

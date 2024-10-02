@@ -84,7 +84,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="detail-extralink align-items-baseline d-flex" style="margin-top: 30px;">
+                            {{-- <div class="detail-extralink align-items-baseline d-flex" style="margin-top: 30px;">
                                 <div class="mr-10">
                                     <span class="">Quantity:</span>
                                 </div>
@@ -94,6 +94,14 @@
                                         value="{{ $product->minimum_buy_qty ?? '1' }}" min="1" id="qty">
                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                 </div>
+                            </div> --}}
+                            <div class="mb-3 quantity">
+                                <a href="#" class="quantity__minus"><span><i
+                                            class="fa fa-minus"></i></span></a>
+                                <input name="quantity" type="text" readonly class=" quantity__input"
+                                    value="1" min="1" id="qty">
+                                <a href="#" class="quantity__plus"><span><i
+                                            class="fa fa-plus"></i></span></a>
                             </div>
                             <div class="d-block" id="qty_alert">
 
@@ -121,10 +129,9 @@
 
                                     <div class="d-none show_cart_btn">
                                         <button type="submit" class="button button-add-to-cart"
-                                            onclick="addToCart()"><i class="fi-rs-shoppi ng-cart"></i>Add to
-                                            cart</button>
+                                            onclick="addToCart()"><i class="fi-rs-shoppi ng-cart"></i>কার্ট</button>
                                         <button type="submit" class="ml-5 button button-add-to-cart" style="background: #AE6BCA !important"
-                                            onclick="buyNow()"><i class="fi-rs-shoppi ng-cart"></i>Buy Now</button>
+                                            onclick="buyNow()"><i class="fi-rs-shoppi ng-cart"></i>অর্ডার </button>
                                     </div>
                                     {{-- @if ($product->stock_qty > 0)
                                         <button  class="button button-add-to-cart" onclick="addToCart()" id="closeModel"><i class="fi-rs-shopping-cart" ></i>Add to cart</button>
@@ -132,10 +139,13 @@
                                     @else
                                         <p class="stock_out"><i class="mr-5 fas fa-window-close"></i>Stock Out</p>
                                     @endif --}}
-                                    <button class="button button-add-to-cart" onclick="addToCart()"
+                                    <div class="d-flex justify-content-between">
+                                        <button class="button button-add-to-cart me-2" onclick="addToCart()"
                                         id="closeModel"><i class="fi-rs-shopping-cart"></i>কার্ট </button>
-                                    <button class="ml-5 button button-add-to-cart" onclick="buyNow()" style="background: #AE6BCA !important"
+                                    <button class=" button button-add-to-cart" onclick="buyNow()" style="background: #AE6BCA !important"
                                         id="closeModel"><i class="fi-rs-shopping-cart"></i>অর্ডার </button>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="mb-3 row" id="stock_alert">
