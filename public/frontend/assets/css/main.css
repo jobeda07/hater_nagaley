@@ -5331,6 +5331,7 @@ table .product-thumbnail img {
 
 .detail-extralink > div {
     display: inline-block;
+    margin-bottom: 10px;
     vertical-align: top;
 }
 
@@ -14089,4 +14090,81 @@ td.product-des.product-name {
 
 .clearfix.product-price-cover {
     margin-bottom: 20px;
+}
+
+.product_details_page {
+    display: block !important;
+}
+
+.remove_qty_btn button {
+    background: #0d9dff;
+    width: 50%;
+}
+
+.remove_qty_btn {
+    display: flex;
+}
+
+.detail-extralink button a {
+    display: block;
+    background: #157347;
+    border: 0;
+    color: #fff;
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: 800;
+}
+
+.detail-extralink button {
+    display: block;
+    width: 100%;
+    border: 0;
+}
+
+.product_shipping_charge {
+    background: #cff4fc;
+    padding: 10px;
+    display: flex;
+    border-radius: 5px;
+    align-items: center;
+    gap: 10px;
+}
+
+.product_shipping_charge i {
+    font-size: 30px;
+    color: #087990;
+}
+
+.product_shipping_charge span {
+    color: #087990;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+.quantity__minus,
+.quantity__plus {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    text-decoration: none;
+    text-align: center;
+    line-height: 38px;
+    border: 1px solid #000;
+    font-size: 20px;
+    color: #000;
+}
+.quantity__input {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border: 1px solid #000;
+    border-left: 0;
+    border-right: 0;
 }
