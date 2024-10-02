@@ -138,19 +138,22 @@
         </div>
         <div class="add-cart">
             @if ($product->is_varient == 1)
-                <a class="add addBtn w-100" id="{{ $product->id }}" onclick="productView(this.id)"
-                    data-bs-toggle="modal" data-bs-target="#quickViewModal">অর্ডার </a>
+                <a class="add addBtn" id="{{ $product->id }}" onclick="productView(this.id)"
+                    data-bs-toggle="modal" data-bs-target="#quickViewModal">কার্ট </a>
+                <a class="add addBuy" id="{{ $product->id }}" onclick="productView(this.id)"
+                    data-bs-toggle="modal" data-bs-target="#quickViewModal"
+                        style="background: #AE6BCA">অর্ডার </a>
             @else
                 @if ($product->stock_qty > 0)
                     <input type="hidden" id="pfrom" value="direct">
                     <input type="hidden" id="product_product_id" value="{{ $product->id }}" min="1">
                     <input type="hidden" id="{{ $product->id }}-product_pname" value="{{ $product->name_en }}">
 
-                    <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})">অর্ডার </a>
-
-                    <a class="add addBuy" href="">কার্ট </a>
+                    <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})"> কার্ট</a>
+                    <a class="add addBuy" onclick="buyNowdirect({{ $product->id }})"
+                        style="background: #AE6BCA">অর্ডার </a>
                 @else
-                    <p class="stock_out w-100 bg-danger">Stock Out </p>
+                    <p class="stock_out w-100 bg-danger">স্টক আউট</p>
                 @endif
             @endif
         </div>

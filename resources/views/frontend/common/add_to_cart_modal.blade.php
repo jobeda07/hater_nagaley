@@ -123,7 +123,7 @@
                                         <button type="submit" class="button button-add-to-cart"
                                             onclick="addToCart()"><i class="fi-rs-shoppi ng-cart"></i>Add to
                                             cart</button>
-                                        <button type="submit" class="ml-5 button button-add-to-cart bg-danger"
+                                        <button type="submit" class="ml-5 button button-add-to-cart" style="background: #AE6BCA !important"
                                             onclick="buyNow()"><i class="fi-rs-shoppi ng-cart"></i>Buy Now</button>
                                     </div>
                                     {{-- @if ($product->stock_qty > 0)
@@ -133,9 +133,9 @@
                                         <p class="stock_out"><i class="mr-5 fas fa-window-close"></i>Stock Out</p>
                                     @endif --}}
                                     <button class="button button-add-to-cart" onclick="addToCart()"
-                                        id="closeModel"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
-                                    <button class="ml-5 button button-add-to-cart bg-danger" onclick="buyNow()"
-                                        id="closeModel"><i class="fi-rs-shopping-cart"></i>Buy Now</button>
+                                        id="closeModel"><i class="fi-rs-shopping-cart"></i>কার্ট </button>
+                                    <button class="ml-5 button button-add-to-cart" onclick="buyNow()" style="background: #AE6BCA !important"
+                                        id="closeModel"><i class="fi-rs-shopping-cart"></i>অর্ডার </button>
                                 </div>
                             </div>
                             <div class="mb-3 row" id="stock_alert">

@@ -86,17 +86,18 @@
                             {{-- <a class="add" id="{{ $product->id }}" onclick="productView(this.id)"
                                 data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                                     class="mr-5 fi-rs-shopping-cart"></i>Add </a> --}}
-                            <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})">অর্ডার </a>
+                                    <a class="add addBtn" id="{{ $product->id }}" onclick="productView(this.id)" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-shopping-cart mr-5"></i>কার্ট </a>
 
-                            <a class="add addBuy" style="background: #AE6BCA" href="">কার্ট </a>
+                            <a class="add addBuy" id="{{ $product->id }}" style="background: #AE6BCA" onclick="productView(this.id)" onclick="productView(this.id)" data-bs-toggle="modal" data-bs-target="#quickViewModal">অর্ডার</a>
                         @else
                             {{-- <input type="hidden" id="pfrom" value="direct">
 	                        <input type="hidden" id="product_product_id" value="{{ $product->id }}"  min="1">
 	                        <input type="hidden" id="{{ $product->id }}-product_pname" value="{{ $product->name_en }}">
 	                        <a class="add" onclick="addToCartDirect({{ $product->id }})" ><i class="mr-5 fi-rs-shopping-cart"></i>Add </a> --}}
-                            <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})">অর্ডার </a>
+                            <a class="add addBtn" onclick="addToCartDirect({{ $product->id }})">কার্ট  </a>
 
-                            <a class="add addBuy" style="background: #AE6BCA" href="">কার্ট</a>
+                            <a class="add addBuy" onclick="buyNowdirect({{ $product->id }})"
+                                style="background: #AE6BCA">অর্ডার </a>
                         @endif
                     </div>
                 </div>

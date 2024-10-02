@@ -304,15 +304,14 @@
                                                         @if ($product->stock_qty > 0)
                                                             <button type="submit" class="button button-add-to-cart"
                                                                 onclick="addToCart()"><i
-                                                                    class="fi-rs-shoppi ng-cart"></i>Add to cart</button>
+                                                                    class="fi-rs-shoppi ng-cart"></i>কার্ট</button>
 
                                                             <button type="submit"
-                                                                class="ml-5 button button-add-to-cart bg-danger"
-                                                                onclick="buyNow()"><i class="fi-rs-shoppi ng-cart"></i>Buy
-                                                                Now</button>
+                                                                class="ml-5 button button-add-to-cart" style="background: #AE6BCA !important"
+                                                                onclick="buyNow()"><i class="fi-rs-shoppi ng-cart"></i>অর্ডার</button>
                                                         @else
-                                                            <p class="stock_out" style="color: #DD1D21 !important;"><i
-                                                                    class="mr-5 fas fa-window-close"></i>Stock Out</p>
+                                                            <p class=" button bg-danger stock_out" style="color: #ffffff !important;"><i
+                                                                    class="mr-5 fas fa-window-close"></i>স্টক আউট</p>
                                                         @endif
                                                     </div>
                                                 </div>

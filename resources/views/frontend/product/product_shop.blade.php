@@ -153,10 +153,10 @@
                                                             data-bs-target="#quickViewModal"><i
                                                                 class="mr-5 fi-rs-shopping-cart"></i>Add </a> --}}
                                                         <a class="add addBtn"
-                                                            onclick="addToCartDirect({{ $product->id }})">অর্ডার </a>
+                                                            onclick="addToCartDirect({{ $product->id }})">কার্ট </a>
 
                                                         <a class="add addBuy" href=""
-                                                            style="background: #AE6BCA">কার্ট </a>
+                                                            style="background: #AE6BCA">অর্ডার </a>
                                                     @else
                                                         {{-- <input type="hidden" id="pfrom" value="direct">
                                                         <input type="hidden" id="product_product_id"
@@ -166,10 +166,10 @@
                                                         <a class="add" onclick="addToCartDirect({{ $product->id }})"><i
                                                                 class="mr-5 fi-rs-shopping-cart"></i>Add </a> --}}
                                                         <a class="add addBtn"
-                                                            onclick="addToCartDirect({{ $product->id }})">অর্ডার </a>
+                                                            onclick="addToCartDirect({{ $product->id }})">কার্ট</a>
 
-                                                        <a class="add addBuy" href=""
-                                                            style="background: #AE6BCA">কার্ট </a>
+                                                        <a class="add addBuy" onclick="buyNowdirect({{ $product->id }})"
+                                                            style="background: #AE6BCA">অর্ডার </a>
                                                     @endif
                                                 </div>
                                             </div>

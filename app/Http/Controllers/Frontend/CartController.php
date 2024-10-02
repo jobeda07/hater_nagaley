@@ -104,7 +104,7 @@ class CartController extends Controller
             if(auth()->check() && auth()->user()->role==7){
                 Cart::add([
                     'id' => $id,
-                    'name' => $request->product_name,
+                    'name' => $product->name_en,
                     'qty' => $request->quantity,
                     'price' => $price,
                     'weight' => 1,
@@ -123,7 +123,7 @@ class CartController extends Controller
             }else{
                 Cart::add([
                     'id' => $id,
-                    'name' => $request->product_name,
+                    'name' => $product->name_en,
                     'qty' => $request->quantity,
                     'price' => $price,
                     'weight' => 1,
@@ -145,7 +145,7 @@ class CartController extends Controller
             if(auth()->check() && auth()->user()->role==7){
                 Cart::add([
                     'id' => $id,
-                    'name' => $request->product_name,
+                    'name' => $product->name_en,
                     'qty' => $request->quantity,
                     'price' => $price,
                     'weight' => 1,
@@ -159,7 +159,7 @@ class CartController extends Controller
             }else{
                 Cart::add([
                     'id' => $id,
-                    'name' => $request->product_name,
+                    'name' => $product->name_en,
                     'qty' => $request->quantity,
                     'price' => $price,
                     'weight' => 1,

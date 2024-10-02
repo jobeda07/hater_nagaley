@@ -93,7 +93,7 @@
         .messenger-links a .fa-facebook-messenger {
             color: #6631B3;
         }
-        
+
         .messenger-links a .fa-whatsapp {
             color: #25D366;
         }
@@ -104,7 +104,7 @@
         	right: 20px;
         	bottom: 80px;
         }
-        
+
     </style>
 </head>
 
@@ -133,10 +133,10 @@
         <div title="" class="messenger-btn"><i class="fa-brands fa-rocketchat"></i></div>
 
         <div id="messenger-links" class="messenger-links">
-            <a title="Mobile" href="https://m.me/191313180741506/" target="_blank"><i class="fa-brands fa-facebook-messenger"></i></a>
+            <a title="Mobile" href="https://m.me/351378081394870/" target="_blank"><i class="fa-brands fa-facebook-messenger"></i></a>
         </div>
     </div>
-    
+
     <!-- Vendor JS-->
     <script src="{{asset('frontend/assets/js/vendor/modernizr-3.6.0.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js')}}"></script>
@@ -546,6 +546,10 @@
             $('#buyNowCheck').val(1);
             addToCart();
         }
+        function buyNowdirect(id){
+            $('#buyNowCheck').val(1);
+            addToCartDirect(id);
+        }
         function addToCart(){
             var total_attributes = parseInt($('#total_attributes').val());
             //alert(total_attributes);
@@ -722,17 +726,25 @@
 
                     // Start Sweertaleart Message
                     if($.isEmptyObject(data.error)){
-                        const Toast = Swal.mixin({
-                            toast:true,
-                            position: 'top-end',
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 1200
-                        })
-                        Toast.fire({
-                          type:'success',
-                          title: data.success
-                        })
+                            const Toast = Swal.mixin({
+                                toast:true,
+                                position: 'top-end',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 1200
+                            })
+                            Toast.fire({
+                            type:'success',
+                            title: data.success
+                            })
+
+                            // Start Sweertaleart Message
+                        var buyNowCheck = $('#buyNowCheck').val();
+                        //alert(buyNowCheck);
+                        if(buyNowCheck && buyNowCheck == 1){
+                            $('#buyNowCheck').val(0);
+                            window.location = '/checkout';
+                        }
                     }else{
                         const Toast = Swal.mixin({
                             toast:true,
@@ -746,7 +758,6 @@
                           title: data.error
                         })
                     }
-                    // Start Sweertaleart Message
 
 
                 }

@@ -41,7 +41,7 @@
         .row.cart-totals.border .form-group input {
             height: auto !important;
         }
-        
+
         .row.cart-totals.border .fieldInput input {
             height: 50px !important;
         }
@@ -88,10 +88,9 @@
         <div class="container mb-80 mt-50">
             <div class="row">
                 <div class="col-lg-8 mb-40">
-                    <h1 class="heading-2 mb-10">Checkout</h1>
+                    <h2 class="heading-2 mb-10">চেক আউট</h2>
                     <div class="d-flex justify-content-between">
-                        <h6 class="text-body">There are <span class="text-brand" id="total_cart_qty"></span> product(s) in
-                            your cart</h6>
+                        <h6 class="text-body">আপনার কার্টে <span class="text-brand" id="total_cart_qty"></span> টি পণ্য আছে</h6>
                         {{-- @php
                             $couponCode = getCoupon();
                         @endphp
@@ -108,11 +107,11 @@
                     <div class="col-lg-7">
                         <div class="row cart-totals border">
                             <div class="d-flex">
-                                <h4 class="mb-30 col-9">Billing Details</h4>
+                                <h4 class="mb-30 col-9">বিলিং বিবরণ</h4>
                             </div>
                             <div class="row">
                                 <div class="form-group fieldInput col-lg-12">
-                                    <label for="name" class="fw-bold text-black"><span class="text-danger">*</span> Name
+                                    <label for="name" class="fw-bold text-black"><span class="text-danger">*</span> নাম
                                     </label>
                                     <input type="text" required="" id="name" name="name"
                                         placeholder="Full Name" value="{{ Auth::user()->name ?? old('name') }}">
@@ -122,7 +121,7 @@
                                 </div>
                                 <div class="form-group fieldInput col-lg-12">
                                     <label for="phone" class="fw-bold text-black"><span
-                                            class="required text-danger">*</span> Phone </label>
+                                            class="required text-danger">*</span> ফোন </label>
                                     <input required="" type="number" name="phone" placeholder="Phone" id="phone"
                                         value="{{ Auth::user()->phone ?? old('phone') }}">
                                     @error('phone')
@@ -131,7 +130,7 @@
                                 </div>
                                 <div class="form-group fieldInput col-lg-12">
                                     <label for="address" class="fw-bold text-black"><span
-                                            class="required text-danger">*</span> Address </label>
+                                            class="required text-danger">*</span> ঠিকানা </label>
                                     <input required="" type="text" name="address" placeholder="address" id="phone"
                                         value="{{ Auth::user()->address ?? old('address') }}">
                                     @error('address')
@@ -141,7 +140,7 @@
                             </div>
                             <div class="form-group col-12 checkout__radio">
                                 <label for="shipping_id" class="fw-bold text-black col-12"><span
-                                        class="text-danger">*</span> Shipping</label>
+                                        class="text-danger">*</span> শিপিং</label>
                                 @foreach ($shippings as $key => $shipping)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="shipping_id"
@@ -149,9 +148,9 @@
                                             @if ($shipping->type == 1) checked @endif>
                                         <label class="form-check-label" for="shipping_id_{{ $shipping->id }}">
                                             @if ($shipping->type == 1)
-                                                Inside Dhaka({{ $shipping->shipping_charge }})
+                                            ঢাকার ভিতরে({{ $shipping->shipping_charge }})
                                             @else
-                                                Outside Dhaka({{ $shipping->shipping_charge }})
+                                            ঢাকার বাইরে({{ $shipping->shipping_charge }})
                                             @endif
                                         </label>
                                     </div>
@@ -179,8 +178,8 @@
                     <div class="col-lg-5   p-0 mt-4 mt-md-0 ">
                         <div class="border p-40 cart-totals ml-30 mb-50">
                             <div class="d-flex align-items-end justify-content-between mb-30">
-                                <h4>Your Order</h4>
-                                <h6 class="text-muted">Subtotal</h6>
+                                <h4>আপনার অর্ডার</h4>
+                                <h6 class="text-muted">সাবটোটাল</h6>
                             </div>
                             <div class="divider-2 mb-30"></div>
                             <div class="table-responsive order_table checkout">
@@ -225,12 +224,12 @@
                                     </td> --}}
                                         {{-- <input type="hidden" name="coupon_id" id="coupon_id"> --}}
                                         <td>
-                                            <h6 class="d-flex justify-content-between mb-2 px-3 px-md-0">Subtotal : <span
+                                            <h6 class="d-flex justify-content-between mb-2 px-3 px-md-0">সাবটোটাল : <span
                                                     class="text-brand text-end">৳<span
                                                         id="cartSubTotal">{{ $cartTotal }}</span></span></h6>
                                         </td>
                                         <td>
-                                            <h6 class="d-flex justify-content-between mb-2 px-3 px-md-0">Shipping : <span
+                                            <h6 class="d-flex justify-content-between mb-2 px-3 px-md-0">শিপিং : <span
                                                     class="text-brand text-end">৳<span id="ship_amount">0.00</span></span>
                                                 <h6>
                                         </td>
@@ -254,7 +253,7 @@
                                         <input type="hidden" value="{{ $cartTotal }}" name="grand_total"
                                             id="grand_total" />
                                         <td>
-                                            <h4 class="d-flex justify-content-between px-3 px-md-0 total-price-noyon">Total : <span
+                                            <h4 class="d-flex justify-content-between px-3 px-md-0 total-price-noyon">টোটাল : <span
                                                     class="text-brand text-end">৳<span
                                                         id="grand_total_set">{{ $cartTotal }}</span></span>
                                                 <h4>
@@ -378,7 +377,7 @@
                                     </label>
                                 </div>
 
-                                <div class="col-4 col-sm-3">
+                                {{-- <div class="col-4 col-sm-3">
                                     <label class="cit-megabox d-block mb-3">
                                         <input class="form-check-input" required="" type="radio"
                                             name="payment_option" id="nagad" value="nagad">
@@ -418,7 +417,7 @@
                                             </span>
                                         </span>
                                     </label>
-                                </div>
+                                </div> --}}
 
                             </div>
                             <!-- </div> -->
