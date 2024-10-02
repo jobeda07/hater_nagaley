@@ -230,21 +230,21 @@
         $attr = get_attribute_by_id($attribute->attribute_id);
         $i++;
     @endphp
-                                                          <div class="form-group col-lg-4">
-                                                          <input type="hidden" name="attribute_ids[]" id="attribute_id_{{ $i }}" value="{{ $attribute->attribute_id }}">
-                                                          <input type="hidden" name="attribute_names[]" id="attribute_name_{{ $i }}" value="{{ $attr->name }}">
-                                                        <label style=" font-weight:bold;color: black;">Chose {{ $attr->name }}<span>**</span></label>
-                                                          <div class="custom_select">
-                                                          <select class="form-control select-active" name="attribute_options[]" id="attribute_option_{{ $i }}">
-                                                          <option value="">--Chose {{ $attr->name }}--</option>
+                                                                                                                                                                                                                                      <div class="form-group col-lg-4">
+                                                                                                                                                                                                                                      <input type="hidden" name="attribute_ids[]" id="attribute_id_{{ $i }}" value="{{ $attribute->attribute_id }}">
+                                                                                                                                                                                                                                      <input type="hidden" name="attribute_names[]" id="attribute_name_{{ $i }}" value="{{ $attr->name }}">
+                                                                                                                                                                                                                                    <label style=" font-weight:bold;color: black;">Chose {{ $attr->name }}<span>**</span></label>
+                                                                                                                                                                                                                                      <div class="custom_select">
+                                                                                                                                                                                                                                      <select class="form-control select-active" name="attribute_options[]" id="attribute_option_{{ $i }}">
+                                                                                                                                                                                                                                      <option value="">--Chose {{ $attr->name }}--</option>
 
-                                                          @foreach ($attribute->values as $value)
+                                                                                                                                                                                                                                      @foreach ($attribute->values as $value)
     <option value="{{ $value }}">{{ $value }}</option>
     @endforeach
 
-                                                          </select>
-                                                          </div>
-                                                          </div>
+                                                                                                                                                                                                                                      </select>
+                                                                                                                                                                                                                                      </div>
+                                                                                                                                                                                                                                      </div>
     @endforeach -->
                                                     @endif
                                                 </div>
@@ -270,8 +270,18 @@
 
                                                 </div>
                                             </div>
+
+                                            <div class="mb-3 quantity">
+                                                <a href="#" class="quantity__minus"><span><i
+                                                            class="fa fa-minus"></i></span></a>
+                                                <input name="quantity" type="text" class="quantity__input"
+                                                    value="1">
+                                                <a href="#" class="quantity__plus"><span><i
+                                                            class="fa fa-plus"></i></span></a>
+                                            </div>
+
                                             <div class="detail-extralink mb-30">
-                                                <div class="product-extra-link2">
+                                                <div class="product-extra-link2 product_details_page">
 
                                                     <input type="hidden" id="product_id" value="{{ $product->id }}"
                                                         min="1">
@@ -306,15 +316,21 @@
                                                                 onclick="addToCart()"><i
                                                                     class="fi-rs-shoppi ng-cart"></i>কার্ট</button>
 
-                                                            <button type="submit"
-                                                                class="ml-5 button button-add-to-cart" style="background: #AE6BCA !important"
-                                                                onclick="buyNow()"><i class="fi-rs-shoppi ng-cart"></i>অর্ডার</button>
+                                                            <button type="submit" class="ml-5 button button-add-to-cart"
+                                                                style="background: #AE6BCA !important"
+                                                                onclick="buyNow()"><i
+                                                                    class="fi-rs-shoppi ng-cart"></i>অর্ডার</button>
                                                         @else
-                                                            <p class=" button bg-danger stock_out" style="color: #ffffff !important;"><i
+                                                            <p class=" button bg-danger stock_out"
+                                                                style="color: #ffffff !important;"><i
                                                                     class="mr-5 fas fa-window-close"></i>স্টক আউট</p>
                                                         @endif
                                                     </div>
                                                 </div>
+
+                                                <button><a href="tel:+8801937563157"> <i class="fa fa-phone"
+                                                            style="background: #0D9DFF;color: #fff; padding: 5px; font-size: 10px; border-radius: 100%;    margin-right: 5px;"></i>
+                                                        01937563157</a></button>
 
                                             </div>
                                             <div class="mb-3 row" id="stock_alert">
@@ -349,9 +365,20 @@
                                                     </li>
                                                 </ul>
                                             </div>
+                                            <div style="margin-top: 110px" class="product_shipping_charge">
+
+                                                <i class="fa-solid fa-cubes"></i>
+                                                <div>
+                                                    <span>ঢাকার ভিতরে <strong>৭০</strong> টাকা <br></span>
+                                                    <span>ঢাকার বাহিরে <strong>১২০</strong> টাকা <br></span>
+                                                    <span>Free Shipping <br></span>
+                                                </div>
+
+                                            </div>
                                         </div>
                                         <!-- Detail Info -->
                                     </div>
+
                                 </div>
                                 <div class="product-info">
                                     <div class="tab-style3">
