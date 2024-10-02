@@ -85,30 +85,31 @@
                 </div>
             </div>
         </div>
-        <div class="container mb-80 mt-50">
-            <div class="row">
-                <div class="col-lg-8 mb-40">
-                    <h2 class="heading-2 mb-10">চেক আউট</h2>
+        <div class="container mb-80 mt-30" style="max-width:1300px">
+            {{-- <div class="row">
+                <div class="col-lg-8 mb-30">
+                    <h3 class="heading-2 mb-10">চেক আউট</h3>
                     <div class="d-flex justify-content-between">
-                        <h6 class="text-body">আপনার কার্টে <span class="text-brand" id="total_cart_qty"></span> টি পণ্য আছে</h6>
-                        {{-- @php
+                        <h6 class="text-body">আপনার কার্টে  পণ্য আছে</h6>
+                        @php
                             $couponCode = getCoupon();
                         @endphp
                         @if ($couponCode)
                             <h6 class="text-body">Coupon code is <span class="text-brand"
                                     id="">{{ $couponCode }}</span></h6>
-                        @endif --}}
+                        @endif
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <form action="{{ route('checkout.payment') }}" method="post">
                 @csrf
                 <div class="row p-2 p-md-0">
-                    <div class="col-lg-7">
+                    <div class="col-lg-6">
                         <div class="row cart-totals border">
                             <div class="d-flex">
-                                <h4 class="mb-30 col-9">বিলিং বিবরণ</h4>
+                                <h6 class="mb-30 col-9">আপনার অর্ডারটি কনফার্ম করতে তথ্যগুলো পূরণ করে "অর্ডার করুন" বাটন এ ক্লিক করুন</h6>
                             </div>
+                            <div class="divider-2 mb-30"></div>
                             <div class="row">
                                 <div class="form-group fieldInput col-lg-12">
                                     <label for="name" class="fw-bold text-black"><span class="text-danger">*</span> নাম
@@ -137,49 +138,55 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="form-group col-12 checkout__radio">
-                                <label for="shipping_id" class="fw-bold text-black col-12"><span
-                                        class="text-danger">*</span> শিপিং</label>
-                                @foreach ($shippings as $key => $shipping)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="shipping_id"
-                                            id="shipping_id_{{ $shipping->id }}" value="{{ $shipping->id }}"
-                                            @if ($shipping->type == 1) checked @endif>
-                                        <label class="form-check-label" for="shipping_id_{{ $shipping->id }}">
-                                            @if ($shipping->type == 1)
-                                            ঢাকার ভিতরে({{ $shipping->shipping_charge }})
-                                            @else
-                                            ঢাকার বাইরে({{ $shipping->shipping_charge }})
-                                            @endif
-                                        </label>
+                                <div class="form-group col-lg-12 address_select_custom">
+                                    <div class="custom_select">
+                                        <label for="shipping_id" class="fw-bold text-black col-12"><span class="text-danger">*</span> ডেলিভারি অপশন</label>
+                                        <select class="form-control select-active col-12" name="shipping_id" id="shipping_id" required>
+
+                                            @foreach ($shippings as $key => $shipping)
+                                                <option value="{{ $shipping->id }}">@if ($shipping->type == 1) ঢাকার ভিতরে @else ঢাকার বাইরে @endif </option>
+                                            @endforeach
+                                        </select>
+                                        @error('shipping_id')
+                                            <p class="text-danger">{{$message}}</p>
+                                        @enderror
                                     </div>
-                                @endforeach
-                                @error('shipping_id')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
+                                </div>
+                                <div class="form-group col-12 checkout__radio">
+                                    <label for="" class="fw-bold text-black col-12">
+                                        <span class="text-danger">*</span> পেমেন্ট মেথড
+                                    </label>
+                                    <div class="d-flex">
+                                        <div class="form-check me-3">
+                                            <input class="form-check-input" type="radio" name="payment_option" id="payment_cod" value="cod" checked>
+                                            <label class="form-check-label" for="payment_cod">
+                                                Cash On Delivery
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="payment_option" id="payment_bkash" value="bkash">
+                                            <label class="form-check-label" for="payment_bkash">
+                                                Bkash
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    @error('payment_option')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
                             </div>
-                            {{-- <div class="form-group col-lg-12 address_select_custom">
-                            <div class="custom_select">
-                                <label for="shipping_id" class="fw-bold text-black col-12"><span class="text-danger">*</span> Shipping</label>
-                                <select class="form-control select-active col-12" name="shipping_id" id="shipping_id" required>
-                                    <option value="">--Select--</option>
-                                    @foreach ($shippings as $key => $shipping)
-                                        <option value="{{ $shipping->id }}">@if ($shipping->type == 1) Inside Dhaka @else Outside Dhaka @endif </option>
-                                    @endforeach
-                                </select>
-                                @error('shipping_id')
-                                    <p class="text-danger">{{$message}}</p>
-                                @enderror
-                            </div>
-                        </div> --}}
+
+
+                            <button type="submit" class="btn btn-fill-out btn-block mt-30" name="checkout_payment">অর্ডার করুন<i class="fi-rs-sign-out ml-15"></i></button>
                         </div>
                     </div>
-                    <div class="col-lg-5   p-0 mt-4 mt-md-0 ">
+                    <div class="col-lg-6   p-0 mt-4 mt-md-0 ">
                         <div class="border p-40 cart-totals ml-30 mb-50">
                             <div class="d-flex align-items-end justify-content-between mb-30">
-                                <h4>আপনার অর্ডার</h4>
-                                <h6 class="text-muted">সাবটোটাল</h6>
+                                <h5>অর্ডার</h5>
+                                <h6 class="text-muted">আইটেম <span class="text-brand" id="total_cart_qty"></span> টি</h6>
                             </div>
                             <div class="divider-2 mb-30"></div>
                             <div class="table-responsive order_table checkout">
@@ -224,12 +231,12 @@
                                     </td> --}}
                                         {{-- <input type="hidden" name="coupon_id" id="coupon_id"> --}}
                                         <td>
-                                            <h6 class="d-flex justify-content-between mb-2 px-3 px-md-0">সাবটোটাল : <span
+                                            <h6 class="d-flex justify-content-between mb-2 px-3 px-md-0">মোট : <span
                                                     class="text-brand text-end">৳<span
                                                         id="cartSubTotal">{{ $cartTotal }}</span></span></h6>
                                         </td>
                                         <td>
-                                            <h6 class="d-flex justify-content-between mb-2 px-3 px-md-0">শিপিং : <span
+                                            <h6 class="d-flex justify-content-between mb-2 px-3 px-md-0">ডেলিভারি চার্জ : <span
                                                     class="text-brand text-end">৳<span id="ship_amount">0.00</span></span>
                                                 <h6>
                                         </td>
@@ -253,7 +260,7 @@
                                         <input type="hidden" value="{{ $cartTotal }}" name="grand_total"
                                             id="grand_total" />
                                         <td>
-                                            <h4 class="d-flex justify-content-between px-3 px-md-0 total-price-noyon">টোটাল : <span
+                                            <h4 class="d-flex justify-content-between px-3 px-md-0 total-price-noyon">সর্বমোট : <span
                                                     class="text-brand text-end">৳<span
                                                         id="grand_total_set">{{ $cartTotal }}</span></span>
                                                 <h4>
@@ -345,7 +352,7 @@
                         <!-- </div> -->
                         <button type="submit" class="btn btn-fill-out btn-block mt-30" name="pre_payment">Pay Now<i class="fi-rs-sign-out ml-15"></i></button>
                     </div> --}}
-                        <div class="payment ml-30" id="payment_checkout">
+                        {{-- <div class="payment ml-30" id="payment_checkout">
                             <h4 class="mb-30">Payment</h4>
                             <!-- <div class="custome-radio"> -->
                             <div class="row gutters-5">
@@ -377,7 +384,7 @@
                                     </label>
                                 </div>
 
-                                {{-- <div class="col-4 col-sm-3">
+                                <div class="col-4 col-sm-3">
                                     <label class="cit-megabox d-block mb-3">
                                         <input class="form-check-input" required="" type="radio"
                                             name="payment_option" id="nagad" value="nagad">
@@ -417,7 +424,7 @@
                                             </span>
                                         </span>
                                     </label>
-                                </div> --}}
+                                </div>
 
                             </div>
                             <!-- </div> -->
@@ -439,7 +446,7 @@
                             </div> -->
                             <button type="submit" class="btn btn-fill-out btn-block mt-30" name="checkout_payment">Place
                                 an Order<i class="fi-rs-sign-out ml-15"></i></button>
-                        </div>
+                        </div> --}}
                     </div>
             </form>
         </div>
@@ -621,15 +628,21 @@
             //         return false;
             //     }
             // });
-            var shipping_id = $('input[name="shipping_id"]').is(':checked');
+
+
+
+            // Check if a shipping option is already selected
+            var shipping_id = $('select[name="shipping_id"]').val();
             if (shipping_id) {
-                shipping_id = $('input[name="shipping_id"]').val();
-                inputCall(shipping_id);
+                inputCall(shipping_id); // Call function with pre-selected shipping_id
             }
-            $('input[name="shipping_id"]').on('change', function() {
+
+            // Trigger inputCall function when the shipping option changes
+            $('select[name="shipping_id"]').on('change', function() {
                 var shipping_id = $(this).val();
                 inputCall(shipping_id);
             });
+
 
             function inputCall(shipping_id) {
                 if (shipping_id) {
