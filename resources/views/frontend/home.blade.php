@@ -17,7 +17,7 @@
 		margin: 0 auto;
 	}
 
-	
+
 .preloader-active1 {
     position: absolute;
     top: 100px;
@@ -49,16 +49,16 @@
 		            	<div class="single-hero-slider single-animation-wrap" style="background-image: url('{{asset($slider->slider_img)}}')">
 			                <div class="slider-content">
 			                    <h1 class="display-2 mb-40">
-			                        @if(session()->get('language') == 'bangla') 
+			                        @if(session()->get('language') == 'bangla')
 	                                    {{ $slider->title_bn }}
-	                                @else 
-	                                    {{ $slider->title_en }} 
+	                                @else
+	                                    {{ $slider->title_en }}
 	                                @endif
 			                    </h1>
 			                    <p class="mb-65">
-			                    	@if(session()->get('language') == 'bangla') 
+			                    	@if(session()->get('language') == 'bangla')
 	                                    {{ $slider->description_bn }}
-	                                @else 
+	                                @else
 	                                    {{ $slider->description_en }}
 	                                @endif
 			                    </p>
@@ -67,7 +67,7 @@
 			                        <input type="email" name="email" placeholder="Your emaill address" required="" />
 			                        <button class="btn" type="submit">Subscribe</button>
 			                    </form>
-			                </div> 
+			                </div>
 			            </div>
 		            </a>
 		            @endforeach
@@ -86,7 +86,33 @@
 	            <div class="slider-arrow slider-arrow-2 flex-right carausel-10-columns-arrow" id="carausel-10-columns-arrows"></div>
 	        </div>
 	        <div class="carausel-10-columns-cover position-relative">
-	            <div class="carausel-10-columns" id="carausel-10-columns">
+	            {{-- <div class="carausel-10-columns" id="carausel-10-columns">
+	            	@foreach($featured_category as $cat)
+	                <div class="card-2 bg-9 d-flex flex-column justify-content-center align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
+	                    <figure class="img-hover-scale overflow-hidden">
+	                        <a href="{{ route('product.category', $cat->slug) }}">
+	                        	@if($cat->image && $cat->image != '' && $cat->image != 'Null')
+									<img class="default-img lazyload img-responsive" data-original="{{ asset($cat->image) }}" src="{{ asset($cat->image) }}" alt="no">
+
+				                @else
+				                    <img class="img-lg mb-3" src="{{ asset('upload/no_image.jpg') }}" alt="" />
+				                @endif
+	                        </a>
+	                    </figure>
+	                    <h6>
+	                    	<a href="{{ route('product.category', $cat->slug) }}">
+	                    		@if(session()->get('language') == 'bangla')
+	                                {{ $cat->name_bn }}
+	                            @else
+	                                {{ $cat->name_en }}
+	                            @endif
+	                    	</a>
+	                    </h6>
+	                  <!--   <span>26 items</span> -->
+	                </div>
+	                @endforeach
+	            </div> --}}
+                <div class="carausel-10-columns" id="carausel-10-columns">
 	            	@foreach($featured_category as $cat)
 	                <div class="card-2 bg-9 d-flex flex-column justify-content-center align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
 	                    <figure class="img-hover-scale overflow-hidden">
@@ -100,10 +126,10 @@
 	                    </figure>
 	                    <h6>
 	                    	<a href="{{ route('product.category', $cat->slug) }}">
-	                    		@if(session()->get('language') == 'bangla') 
+	                    		@if(session()->get('language') == 'bangla')
 	                                {{ $cat->name_bn }}
-	                            @else 
-	                                {{ $cat->name_en }} 
+	                            @else
+	                                {{ $cat->name_en }}
 	                            @endif
 	                    	</a>
 	                    </h6>
@@ -119,20 +145,20 @@
 	@php
         $campaign = \App\Models\Campaing::where('status', 1)->where('is_featured', 1)->first();
     @endphp
-    
+
     @if($campaign)
         @php
             $start_diff = date_diff(date_create($campaign->flash_start ?? ''), date_create(date('d-m-Y H:i:s')));
             $end_diff = date_diff(date_create(date('d-m-Y H:i:s')), date_create($campaign->flash_end ?? ''));
         @endphp
-        
+
         @if ($start_diff->invert == 0 && $end_diff->invert == 0)
         <section class="common-product section-padding">
     	    <div class="container wow animate__animated animate__fadeIn">
     	        <div class="section-title">
     	            <div class="title">
     	                <h3>My Campaign Sell</h3>
-    
+
     	                <div class="deals-countdown-wrap">
     	                    <div class="deals-countdown" data-countdown="{{ date(('Y-m-d H:i:s'), strtotime($campaign->flash_end)) }}"></div>
     	                </div>
@@ -169,14 +195,14 @@
 	                    <img src="{{asset($banner->banner_img)}}" class="img-fluid" alt="" style="height: 300px; width: 100%;"/>
 	                    <div class="banner-text">
 	                        <h4>
-	                        	@if(session()->get('language') == 'bangla') 
+	                        	@if(session()->get('language') == 'bangla')
                                     {{
-                                    	$banner->title_bn 
+                                    	$banner->title_bn
                                     }}
                                 @else
                                     {{
-                                    	$banner->title_en 
-                                    }} 
+                                    	$banner->title_en
+                                    }}
                                 @endif
 	                        </h4>
 	                        <a href="{{$banner->banner_url}}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
@@ -201,7 +227,7 @@
 							<button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#category{{ $category->id }}" type="button" role="tab" aria-controls="tab-two" aria-selected="false">{{ $category->name_en}}</button>
 						</li>
                     @endforeach
-	               
+
 	            </ul>
 	        </div>
 	        <!--End nav-tabs-->
@@ -225,16 +251,16 @@
 		                @forelse($products as $product)
 	                        @include('frontend.common.product_grid_view')
 	                    @empty
-		                    @if(session()->get('language') == 'bangla') 
-		                        <h5 class="text-danger">এখানে কোন পণ্য খুঁজে পাওয়া যায়নি!</h5> 
-		                    @else 
-		                       <h5 class="text-danger">No products were found here!</h5> 
+		                    @if(session()->get('language') == 'bangla')
+		                        <h5 class="text-danger">এখানে কোন পণ্য খুঁজে পাওয়া যায়নি!</h5>
+		                    @else
+		                       <h5 class="text-danger">No products were found here!</h5>
 		                    @endif
 	                  	@endforelse
                     </div>
                     <!--End product-grid-4-->
                 </div>
-                @endforeach 
+                @endforeach
                 <!--En tab two-->
 	        </div>
 	        <!--End tab-content-->
@@ -281,7 +307,7 @@
 		                                	@include('frontend.common.product_grid_view',['product' => $product])
 										@endif
 	                                @endforeach
-	                                <!--End product Wrap-->             
+	                                <!--End product Wrap-->
 	                            </div>
 	                        </div>
 	                    </div>
@@ -504,10 +530,10 @@
 								</figure>
 								<h6>
 									<a href="{{ route('vendor.product', $vendor->slug) }}">
-										@if(session()->get('language') == 'bangla') 
+										@if(session()->get('language') == 'bangla')
 											{{ $vendor->shop_name }}
-										@else 
-											{{ $vendor->shop_name }} 
+										@else
+											{{ $vendor->shop_name }}
 										@endif
 									</a>
 								</h6>
@@ -542,10 +568,10 @@
 								<div class="col-md-8 mb-0">
 									<h6>
 										<a href="{{ route('product.details',$product_top_selling->slug) }}">
-											@if(session()->get('language') == 'bangla') 
+											@if(session()->get('language') == 'bangla')
 												{{ $product_top_selling->name_bn }}
-											@else 
-												{{ $product_top_selling->name_en }} 
+											@else
+												{{ $product_top_selling->name_en }}
 											@endif
 										</a>
 									</h6>
@@ -590,10 +616,10 @@
 	                        <div class="col-md-8 mb-0">
 	                            <h6>
 	                                <a href="{{ route('product.details',$product_trending->slug) }}">
-	                                	@if(session()->get('language') == 'bangla') 
+	                                	@if(session()->get('language') == 'bangla')
 											{{ $product_trending->name_bn }}
-										@else 
-											{{ $product_trending->name_en }} 
+										@else
+											{{ $product_trending->name_en }}
 										@endif
 	                                </a>
 	                            </h6>
@@ -638,10 +664,10 @@
 	                        <div class="col-md-8 mb-0">
 	                            <h6>
 	                                <a href="{{ route('product.details',$product_recently_add->slug) }}">
-	                                	@if(session()->get('language') == 'bangla') 
+	                                	@if(session()->get('language') == 'bangla')
 											{{ $product_recently_add->name_bn }}
-										@else 
-											{{ $product_recently_add->name_en }} 
+										@else
+											{{ $product_recently_add->name_en }}
 										@endif
 	                                </a>
 	                            </h6>
@@ -686,10 +712,10 @@
 	                        <div class="col-md-8 mb-0">
 	                            <h6>
 	                                <a href="{{ route('product.details',$product_top_rate->slug) }}">
-	                                	@if(session()->get('language') == 'bangla') 
+	                                	@if(session()->get('language') == 'bangla')
 											{{ $product_top_rate->name_bn }}
-										@else 
-											{{ $product_top_rate->name_en }} 
+										@else
+											{{ $product_top_rate->name_en }}
 										@endif
 									</a>
 	                            </h6>
