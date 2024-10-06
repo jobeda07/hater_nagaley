@@ -426,6 +426,12 @@ class OrderController extends Controller
         $shippings = Shipping::where('status', 1)->get();
         return view('backend.sales.all_orders.show', compact('order', 'shippings'));
     }
+    public function reseller_show($id)
+    {
+        $order = Order::findOrFail($id);
+        $shippings = Shipping::where('status', 1)->get();
+        return view('backend.sales.all_orders.reseller_show', compact('order', 'shippings'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -620,6 +626,11 @@ class OrderController extends Controller
         // dd($pdf);
         return view('backend.invoices.invoice_print', compact('order'));
         // return $pdf->loadView('invoice.pdf');
+    } // end method
+    public function reseller_invoice_print_download($id)
+    {
+        $order = Order::findOrFail($id);
+        return view('backend.invoices.reseller_invoice_print', compact('order'));
     } // end method
     public function vendor_show_status($id)
     {

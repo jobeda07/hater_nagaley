@@ -238,12 +238,14 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 		Route::get('/all_orders', [OrderController::class, 'index'])->name('all_orders.index');
 		Route::get('/all_orders/pos_sale_index', [OrderController::class, 'index2'])->name('all_orders.pos_sale_index');
 		Route::get('/all_orders/{id}/show', [OrderController::class, 'show'])->name('all_orders.show');
+		Route::get('/all_orders/{id}/reseller/show', [OrderController::class, 'reseller_show'])->name('all_orders.reseller_show');
 		Route::get('/all_orders/all_vendor_sale_index', [OrderController::class, 'AllvendorSellView'])->name('all_orders.all_vendor_sale_index');
         Route::get('/all_orders/vendor_sale_index', [OrderController::class, 'vendorSellView'])->name('all_orders.vendor_sale_index');
 		Route::get('/orders_delete/{id}', [OrderController::class, 'destroy'])->name('delete.orders');
 		Route::post('/orders_update/{id}', [OrderController::class, 'update'])->name('admin.orders.update');
 		Route::get('/invoice/{id}', [OrderController::class, 'invoice_download'])->name('invoice.download');
 		Route::get('/print/invoice/{order}', [OrderController::class, 'invoice_print_download'])->name('print.invoice.download');
+		Route::get('/reseller/print/invoice/{order}', [OrderController::class, 'reseller_invoice_print_download'])->name('reseller.print.invoice.download');
 		Route::get('/vendor/show_status/{id}', [OrderController::class, 'vendor_show_status'])->name('vendor.showStatus');
         Route::get('/order/product/courierSend', [OrderController::class, 'order_product_courierSend'])->name('order.product.courierSend');
         Route::get('/all_orders/all_reseller_sale_index', [OrderController::class, 'AllresellerSellView'])->name('all_orders.all_reseller_sale_index');

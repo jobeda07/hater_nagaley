@@ -78,14 +78,14 @@
                             <div class="text">
                                 <h6 class="mb-1">Customer</h6>
                                 <p class="mb-1">
-                                    {{ $order->name ?? '' }} <br />
+                                    {{ $order->user->name ?? '' }} <br />
                                     @if($order->email)
                                         {{ $order->email ?? '' }} <br />
                                         {{ $order->phone ?? '' }}
                                     @endif
                                 </p>
-                                <a href="#" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop1{{ $order->id }}">Edit Customer</a>
+                                {{-- <a href="#" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop1{{ $order->id }}">Edit Customer</a> --}}
                             </div>
                         </article>
                     </div>
@@ -274,11 +274,24 @@
                                         <th width="30%">Product</th>
                                         <th width="10%">Unit Price</th>
                                         <th width="10%">Quantity</th>
-                                        <th width="20%">Vendor Name</th>
-                                        <th width="10%">Vendor Comission</th>
+                                        <th width="20%">Extra </th>
                                         <th width="20%" class="text-end">Total</th>
                                     </tr>
                                 </thead>
+                                @php
+                                    $quantity = 0;
+                                    $extraPay = 0;
+                                    $extra = 0;
+                                    if($order->collectable_amount > $order->grand_total){
+                                        $extraPay = $order->collectable_amount - $order->grand_total;
+
+                                        foreach ($order->order_details as $order_detail) {
+                                        $quantity += $order_detail->qty;
+                                        }
+                                        $extra = $extraPay / $quantity;
+                                        $extra = number_format($extra, 2);
+                                    }
+                                @endphp
                                 <tbody>
                                     @foreach ($order->order_details as $key => $orderDetail)
                                         <tr>
@@ -305,17 +318,8 @@
                                             </td>
                                             <td>{{ $orderDetail->price ?? '0.00' }} TK</td>
                                             <td>{{ $orderDetail->qty ?? '0' }}</td>
-                                            @php
-                                                $user = App\Models\User::where('id', $orderDetail->vendor_id)->first();
-                                                if ($user) {
-                                                    $v_name = $user->name;
-                                                } else {
-                                                    $v_name = 'Admin';
-                                                }
-                                            @endphp
-                                            <td>{{ $v_name }}</td>
-                                            <td>{{ $orderDetail->v_comission * $orderDetail->qty }} TK</td>
-                                            <td class="text-end">{{ $orderDetail->price * $orderDetail->qty ?? '0.00' }} TK
+                                            <td>{{ $extra }} TK</td>
+                                            <td class="text-end">{{ ($orderDetail->price * $orderDetail->qty) + $extra ?? '0.00' }} TK
                                             </td>
                                         </tr>
                                     @endforeach
@@ -332,31 +336,16 @@
                                             foreach ($orderDetails as $key => $orderDetail) {
                                                 $sum1 += $orderDetail->v_comission;
                                                 $sum2 += $orderDetail->qty;
-                                                $price += $orderDetail->price * $orderDetail->qty;
+                                                $price += ($orderDetail->price * $orderDetail->qty)+$extraPay;
                                                 $sum += $orderDetail->v_comission * $orderDetail->qty;
                                             }
                                         @endphp
                                         <td colspan="6">
                                             <article class="float-end">
-                                                @if (Auth::guard('admin')->user()->role == '2')
-                                                    <dl class="dlist">
-                                                        <dt>SubTotal:</dt>
-                                                        <dd>{{ $price ?? '0.00' }}</dd>
-                                                    </dl>
-                                                    <dl class="dlist">
-                                                        <dt>Vendor Comission:</dt>
-                                                        <dd>{{ $sum ?? '0.00' }}</dd>
-                                                    </dl>
-                                                    <dl class="dlist">
-                                                        <dt>Receiveable Amount:</dt>
-                                                        <dd>{{ $price - $sum }}</dd>
-                                                    </dl>
-                                                @else
                                                     <dl class="dlist">
                                                         <dt>Subtotal:</dt>
-                                                        <dd id="subtotal">{{ $order->sub_total ?? '0.00' }}</dd>
+                                                        <dd id="subtotal">{{ ($order->sub_total+$extraPay) ?? '0.00' }}</dd>
                                                     </dl>
-                                                @endif
                                                 @if (!(Auth::guard('admin')->user()->role == '2'))
                                                     <dl class="dlist">
                                                         <dt>Shipping cost:</dt>
@@ -369,7 +358,7 @@
                                                     <dl class="dlist">
                                                         <dt>Grand total:</dt>
                                                         <dd id="grandtotal"><b
-                                                                class="h5">{{ $order->grand_total }}</b>
+                                                                class="h5">{{ $order->grand_total+$extraPay }}</b>
                                                         <dd id="buyingprice" style="display: none"><b
                                                                 class="h5">{{ $order->totalbuyingPrice }}</b>
                                                         </dd>
@@ -401,7 +390,7 @@
                         </div>
                     </div>
                 </div> --}}
-                    @if (!(Auth::guard('admin')->user()->role == '2'))
+                    {{-- @if (!(Auth::guard('admin')->user()->role == '2'))
                         @if (in_array($delivery_status, ['Pending', 'Holding', 'Processing', 'Shipped']))
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary">Update Order</button>
@@ -411,7 +400,7 @@
                                 <button type="button" disabled class="btn btn-primary">Update Order</button>
                             </div>
                         @endif
-                    @endif
+                    @endif --}}
                     </form>
                 </div>
             </div>

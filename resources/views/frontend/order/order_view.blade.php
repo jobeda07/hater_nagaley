@@ -128,7 +128,6 @@
                                                     $extra = $extraPay / $quantity;
                                                     $extra = number_format($extra, 2);
                                                 }
-
                                             @endphp
                                         <tbody>
                                                 @foreach($order->order_details as $order_detail)
