@@ -330,6 +330,74 @@ class OrderController extends Controller
         }
         return view('backend.sales.all_orders.vendor_sale_index', compact('orders', 'orderIds', 'delivery_status', 'date', 'payment_status'));
     }
+
+    public function AllresellerSellView(Request $request)
+    {
+        $date = $request->date;
+        $delivery_status = null;
+        $payment_status = null;
+        $vendor_id = null;
+        $ordersQuery = Order::latest();
+        $dateRange = explode(" - ", $date);
+        $startDate = date('Y-m-d', strtotime($dateRange[0]));
+        if (isset($dateRange[1])) {
+            $endDate = date('Y-m-d', strtotime($dateRange[1]));
+        } else {
+            $endDate = date('Y-m-d');
+        }
+        if ($request->filled(['delivery_status', 'payment_status', 'date'])) {
+            if ($startDate === $endDate) {
+                $ordersQuery->whereDate('created_at', $startDate)->where('delivery_status', $request->delivery_status)
+                    ->where('payment_status', $request->payment_status);
+            } else {
+                $ordersQuery->whereBetween('created_at', [$startDate, $endDate])->where('delivery_status', $request->delivery_status)
+                    ->where('payment_status', $request->payment_status);
+            }
+        } elseif ($request->filled(['delivery_status', 'date',]) && $request->payment_status == null) {
+            if ($startDate === $endDate) {
+                $ordersQuery->whereDate('created_at', $startDate)->where('delivery_status', $request->delivery_status);
+            } else {
+                $ordersQuery->whereBetween('created_at', [$startDate, $endDate])->where('delivery_status', $request->delivery_status);
+            }
+        } elseif ($request->filled(['payment_status', 'date']) && $request->delivery_status == null) {
+            if ($startDate === $endDate) {
+                $ordersQuery->whereDate('created_at', $startDate)->where('payment_status', $request->payment_status);
+            } else {
+                $ordersQuery->whereBetween('created_at', [$startDate, $endDate])->where('payment_status', $request->payment_status);
+            }
+        } elseif ($request->filled(['delivery_status', 'date']) && $payment_status == null) {
+            if ($startDate === $endDate) {
+                $ordersQuery->whereDate('created_at', $startDate)->where('delivery_status', $request->delivery_status);
+            } else {
+                $ordersQuery->whereBetween('created_at', [$startDate, $endDate])->where('delivery_status', $request->delivery_status);
+            }
+        } elseif ($request->filled(['payment_status', 'date']) && $delivery_status == null) {
+            if ($startDate === $endDate) {
+                $ordersQuery->whereDate('created_at', $startDate)->where('payment_status', $request->payment_status);
+            } else {
+                $ordersQuery->whereBetween('created_at', [$startDate, $endDate])->where('payment_status', $request->payment_status);
+            }
+        } elseif ($request->filled(['date']) && $delivery_status == null && $payment_status == null) {
+            if ($startDate === $endDate) {
+                $ordersQuery->whereDate('created_at', $startDate);
+            } else {
+                $ordersQuery->whereBetween('created_at', [$startDate, $endDate]);
+            }
+        } elseif ($request->filled(['date']) && $delivery_status == null && $payment_status == null) {
+            if ($startDate === $endDate) {
+                $ordersQuery->whereDate('created_at', $startDate);
+            } else {
+                $ordersQuery->whereBetween('created_at', [$startDate, $endDate]);
+            }
+        } else {
+            $ordersQuery->orderBy('id', 'desc');
+        }
+        //$vendors = Vendor::pluck('user_id')->toArray();
+        $users = User::where('role', 7)->pluck('id')->toArray();
+        $orderIds = Order::whereIn('user_id', $users)->pluck('id');
+        $orders = $ordersQuery->whereIn('id', $orderIds)->orderBy('created_at', 'desc')->paginate(15);
+        return view('backend.sales.all_orders.all_reseller_sale_index', compact('orders', 'orderIds', 'delivery_status', 'date', 'payment_status', 'users'));
+    }
     public function create()
     {
         //

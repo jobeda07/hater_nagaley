@@ -229,7 +229,7 @@ class ProductController extends Controller
 
                         if (isset($request->vimages[$i])) {
                             $image = $request->vimages[$i];
-                        
+
                             if ($image) {
                                 $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
                                 Image::make($image)->resize(500, 500)->save('upload/products/variations/' . $name_gen);
@@ -523,6 +523,32 @@ class ProductController extends Controller
                     }
                 } else {
                     $product->attributes = json_encode(array());
+                    if ($request->has('vnames')) {
+                        $i = 0;
+                        foreach ($request->vnames as $key => $name) {
+                            $stock = ProductStock::create([
+                                'product_id' => $product->id,
+                                'varient'    => $name,
+                                'sku'        => $request->vskus[$i],
+                                'price'      => $request->vprices[$i],
+                                'qty'        => $request->vqtys[$i],
+                            ]);
+
+                            $image = $request->vimages[$i];
+                            if ($image) {
+                                $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+                                Image::make($image)->resize(500, 500)->save('upload/products/variations/' . $name_gen);
+                                $save_url = 'upload/products/variations/' . $name_gen;
+                            } else {
+                                $save_url = '';
+                            }
+
+                            $stock->image = $save_url;
+                            $stock->save();
+
+                            $i++;
+                        }
+                    }
                     $product->is_varient = 0;
                 }
 

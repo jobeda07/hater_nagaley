@@ -13131,9 +13131,9 @@ footer .hotline img {
     }
 
     .table td {
-        display: block;
-        width: 100%;
-        text-align: center;
+        /*display: block;*/
+        /*width: 100%;*/
+        text-align: start;
     }
 
     .table td::before {
@@ -14168,4 +14168,9 @@ td.product-des.product-name {
     border: 1px solid #000;
     border-left: 0;
     border-right: 0;
+}
+
+.menu-item-has-children img {
+	width: 20px;
+	margin-top: ;
 }

@@ -246,7 +246,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 		Route::get('/print/invoice/{order}', [OrderController::class, 'invoice_print_download'])->name('print.invoice.download');
 		Route::get('/vendor/show_status/{id}', [OrderController::class, 'vendor_show_status'])->name('vendor.showStatus');
         Route::get('/order/product/courierSend', [OrderController::class, 'order_product_courierSend'])->name('order.product.courierSend');
-
+        Route::get('/all_orders/all_reseller_sale_index', [OrderController::class, 'AllresellerSellView'])->name('all_orders.all_reseller_sale_index');
 	});
 
 	// payment status
